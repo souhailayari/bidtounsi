@@ -1,32 +1,17 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "backend/package.json",
-      "use": "@vercel/node",
-      "config": { "zeroConfig": true }
-    },
-    {
-      "src": "frontend/package.json",
-      "use": "@vercel/static-build",
-      "config": { "distDir": "build" }
-    }
-  ],
-  "routes": [
-    {
-      "src": "/api/(.*)",
-      "dest": "backend/dist/index.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "frontend/build/index.html"
-    }
-  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "frontend/build",
   "env": {
     "MONGODB_URI": "@mongodb_uri",
     "JWT_SECRET": "@jwt_secret",
     "EMAIL_USER": "@email_user",
     "EMAIL_PASSWORD": "@email_password",
     "ADMIN_KEY": "@admin_key"
+  },
+  "functions": {
+    "backend/**/*.ts": {
+      "runtime": "nodejs18.x"
+    }
   }
 }
