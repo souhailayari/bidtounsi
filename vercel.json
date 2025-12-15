@@ -2,15 +2,5 @@
   "version": 2,
   "buildCommand": "cd frontend && npm ci && npm run build",
   "outputDirectory": "frontend/build",
-  "framework": "vite",
-  "env": {
-    "NODE_ENV": "production"
-  },
-  "regions": ["cdg1"],
-  "functions": {
-    "api/**/*.ts": {
-      "runtime": "nodejs18.x",
-      "memory": 1024
-    }
-  }
+  "framework": "vite"
 }
