@@ -1,13 +1,12 @@
 {
-  "name": "bidtounsi-backend",
-  "version": "0.1.0",
+  "name": "bidtounsi-api",
+  "version": "1.0.0",
   "private": true,
   "main": "dist/index.js",
   "scripts": {
-    "dev": "ts-node-dev --respawn --transpile-only src/index.ts",
-    "build": "tsc -p tsconfig.json",
-    "start": "node dist/index.js",
-    "seed": "ts-node-dev src/scripts/seed.ts"
+    "build": "tsc",
+    "dev": "ts-node-dev --respawn src/index.ts",
+    "start": "node dist/index.js"
   },
   "dependencies": {
     "@types/helmet": "^0.0.48",
@@ -36,13 +35,7 @@
     "@types/jsonwebtoken": "^9.0.10",
     "@types/node": "^22.18.11",
     "@types/nodemailer": "^7.0.3",
-    "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.9.3"
-  },
-  "description": "Minimal Express + TypeScript backend for the BidTounsi project.",
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "type": "commonjs"
+  }
 }
