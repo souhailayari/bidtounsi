@@ -6,16 +6,18 @@
     "dev": "concurrently \"cd backend && npm run dev\" \"cd frontend && npm run dev\"",
     "backend": "cd backend && npm run dev",
     "frontend": "cd frontend && npm run dev",
-    "build": "npm run build:backend && npm run build:frontend",
+    "build": "npm run build:frontend",
     "build:backend": "cd backend && npm run build",
     "build:frontend": "cd frontend && npm run build",
-    "start": "npm run build && node backend/dist/index.js"
+    "postbuild": "cd frontend && npm run build",
+    "start": "node backend/dist/index.js"
   },
+  "dependencies": {},
   "devDependencies": {
     "concurrently": "^8.2.0"
   },
   "description": "BidTounsi - Marketplace automobile",
   "keywords": ["automobile", "marketplace", "vente", "location"],
-  "author": "Your Name",
+  "author": "Souhail Ayari",
   "license": "MIT"
 }
