@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test du Modèle 3D</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #60A5FA;
+        }
+        .test {
+            margin: 20px 0;
+            padding: 15px;
+            background: #2a2a2a;
+            border-radius: 8px;
+            border-left: 4px solid #60A5FA;
+        }
+        .status {
+            font-weight: bold;
+            margin-top: 10px;
+        }
+        .success {
+            color: #10b981;
+        }
+        .error {
+            color: #ef4444;
+        }
+        code {
+            background: #1a1a1a;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔍 Test du Modèle 3D BMW</h1>
+        
+        <div class="test">
+            <h2>Vérification des Chemins Disponibles</h2>
+            <p>Les chemins suivants vont être testés:</p>
+            <ul>
+                <li><code>/models/bmw_e34_stance_style.glb</code></li>
+                <li><code>./models/bmw_e34_stance_style.glb</code></li>
+                <li><code>/public/models/bmw_e34_stance_style.glb</code></li>
+            </ul>
+            <div id="pathTests"></div>
+        </div>
+
+        <div class="test">
+            <h2>Informations du Serveur</h2>
+            <div id="serverInfo"></div>
+        </div>
+    </div>
+
+    <script>
+        const paths = [
+            '/models/bmw_e34_stance_style.glb',
+            './models/bmw_e34_stance_style.glb',
+            '/public/models/bmw_e34_stance_style.glb'
+        ];
+
+        async function testPath(path) {
+            try {
+                const response = await fetch(path, { method: 'HEAD' });
+                return {
+                    path,
+                    status: response.status,
+                    ok: response.ok,
+                    type: response.headers.get('content-type'),
+                    size: response.headers.get('content-length')
+                };
+            } catch (error) {
+                return {
+                    path,
+                    error: error.message
+                };
+            }
+        }
+
+        async function runTests() {
+            const results = await Promise.all(paths.map(testPath));
+            const container = document.getElementById('pathTests');
+            
+            container.innerHTML = results.map(r => {
+                if (r.error) {
+                    return `<div class="status error">❌ ${r.path}: ${r.error}</div>`;
+                } else if (r.ok) {
+                    return `<div class="status success">✅ ${r.path} (${r.status}) - Size: ${r.size} bytes</div>`;
+                } else {
+                    return `<div class="status error">❌ ${r.path} (${r.status})</div>`;
+                }
+            }).join('');
+        }
+
+        function displayServerInfo() {
+            const info = document.getElementById('serverInfo');
+            info.innerHTML = `
+                <p><strong>Protocole:</strong> ${window.location.protocol}</p>
+                <p><strong>Hôte:</strong> ${window.location.host}</p>
+                <p><strong>Pathname:</strong> ${window.location.pathname}</p>
+                <p><strong>Origin:</strong> ${window.location.origin}</p>
+            `;
+        }
+
+        // Exécuter les tests au chargement
+        window.addEventListener('load', () => {
+            displayServerInfo();
+            runTests();
+        });
+    </script>
+</body>
+</html>

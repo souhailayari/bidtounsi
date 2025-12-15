@@ -1,0 +1,54 @@
+version: '3.8'
+
+services:
+  mongodb:
+    image: mongo:latest
+    container_name: bidtounsi-mongodb
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_DATABASE: bidtounsi
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - bidtounsi-network
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: bidtounsi-backend
+    ports:
+      - "4000:4000"
+    environment:
+      NODE_ENV: production
+      MONGODB_URI: mongodb://mongodb:27017/bidtounsi
+      JWT_SECRET: ${JWT_SECRET:-your-secret-key}
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
+    depends_on:
+      - mongodb
+    networks:
+      - bidtounsi-network
+    restart: unless-stopped
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: bidtounsi-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      VITE_API_URL: http://backend:4000
+    depends_on:
+      - backend
+    networks:
+      - bidtounsi-network
+    restart: unless-stopped
+
+volumes:
+  mongodb_data:
+
+networks:
+  bidtounsi-network:
+    driver: bridge

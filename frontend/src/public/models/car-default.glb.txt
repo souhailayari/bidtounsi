@@ -1,0 +1,17 @@
+PLACEHOLDER FILE FOR 3D MODEL
+
+Ce fichier est un placeholder. Remplacez-le par votre vrai fichier .glb
+
+Instructions:
+1. Téléchargez un modèle 3D .glb depuis:
+   - Sketchfab: https://sketchfab.com/3d-models?features=downloadable&category=cars-vehicles
+   - Poly Pizza: https://poly.pizza/
+   - Free3D: https://free3d.com/3d-models/car
+
+2. Renommez votre fichier en: car-default.glb
+
+3. Remplacez ce fichier par votre modèle .glb
+
+4. Le modèle sera automatiquement chargé dans l'application
+
+Note: Si aucun fichier .glb n'est trouvé, une voiture 3D par défaut sera affichée.

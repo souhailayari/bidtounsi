@@ -1,0 +1,15 @@
+# Ignore files from deployment
+node_modules/
+.git/
+.env
+.env.local
+.env.*.local
+npm-debug.log
+.DS_Store
+dist/
+build/
+*.log
+.gitignore
+README.md
+.editorconfig
+src/
