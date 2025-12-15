@@ -1,17 +1,5 @@
 {
   "version": 2,
   "buildCommand": "npm run build",
-  "outputDirectory": "frontend/build",
-  "env": {
-    "MONGODB_URI": "@mongodb_uri",
-    "JWT_SECRET": "@jwt_secret",
-    "EMAIL_USER": "@email_user",
-    "EMAIL_PASSWORD": "@email_password",
-    "ADMIN_KEY": "@admin_key"
-  },
-  "functions": {
-    "backend/**/*.ts": {
-      "runtime": "nodejs18.x"
-    }
-  }
+  "outputDirectory": "frontend/build"
 }
